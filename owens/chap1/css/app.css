@@ -1,0 +1,24 @@
+html, body {
+    margin: 0px;
+    background-image: linear-gradient(to bottom right, #95d9f9, #ae4bc3);
+	overflow-x: hidden;
+
+}
+
+h1 {
+    color: #1b95cd; 
+    font-family: tahomas, sans-serif;
+    position: absolute;
+    opacity: 60%;
+	-webkit-text-stroke: 2px white;    /* adds the outline around the letters */
+    
+}
+
+.globe {
+	text-align: center;
+	margin-top: 150px;	
+}
+
+.globe_image {
+	height: 70vh;
+}
