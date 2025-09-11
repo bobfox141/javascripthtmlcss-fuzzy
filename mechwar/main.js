@@ -100,7 +100,7 @@ function endofturn() {
 }
 
 function testrandom() {
-  console.log("print out 100 random numbers. \n");
+  console.log("Print out 100 random numbers. \n");
   let count = 0;
   while (count < 100) {
     count++;
