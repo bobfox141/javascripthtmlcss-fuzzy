@@ -83,8 +83,33 @@ function loadcomputermech() {
   }
   return data;
 }
+// this is binary initiative.
+function initiative() {
+  if (rollD20() > 10) {
+    return true;
+  }
+  return false;
+}
+
+function playermove() {}
+
+function computermove() {}
+
+function endofturn() {
+  return true;
+}
+
+function testrandom() {
+  console.log("print out 100 random numbers. \n");
+  let count = 0;
+  while (count < 100) {
+    count++;
+    process.stdout.write(rollD20() + " ");
+  }
+}
 
 function main() {
+  let winner = false;
   console.log("Welcome to MechWar, a simple mech shooting game. You load your");
   console.log(
     "Mech, and the computer loads it's mech and you have it out in the arena."
@@ -96,11 +121,28 @@ function main() {
     "machine. It loads your mech from your mech.yaml file and puts it against the"
   );
   console.log("computers computer.yaml file, generated before battle! ");
+  // test the random number gen
+  testrandom();
+  console.log();
+
   // load the data files
 
   // create the mechs and add the data
   const playermech = new PlayerMech();
   const computermech = new ComputerMech();
+  while (!winner) {
+    console.log("Rolling for intialtive. Tie goes to the great sky wizard.");
+    if (initiative()) {
+      console.log("Player has initiative and moves first.");
+      playermove();
+      computermove();
+    } else {
+      console.log("Computer has initiative and moves first.");
+      computermove();
+      playermove();
+    }
+    winner = endofturn();
+  }
 }
 
 main();
