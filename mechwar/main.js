@@ -147,7 +147,7 @@ class Mech {
 		return true;
 	    }
 	    else if (roll > 10) {
-		console.log("Skilled Defender. ")
+		console.log("Skilled Defender. Damage reduced by skill.")
 		damage = damage * this.pilot / 100.0;   // 
 		this.hp -= damage;
 
@@ -234,7 +234,7 @@ function loadplayermech() {
 }
 
 function createplayermech(mech) {
-    mech.
+    console.log("Creating Player mech.")
 }
 
 function loadcomputermech() {
@@ -253,7 +253,7 @@ function loadcomputermech() {
 // this is binary initiative.
 function initiative() {
     if (rollD20() > 10) {
-	return true;
+		return true;
     }
     return false;
 }
@@ -264,7 +264,7 @@ function playermove() {
 }
 
 function computermove() {
-    attack()
+    
 
 }
 
@@ -273,11 +273,12 @@ function endofturn() {
 }
 
 function testrandom() {
+	let numbers = [];
     console.log("Print out 100 random numbers. \n");
     let count = 0;
     while (count < 100) {
 	count++;
-	push.append(rollD20());
+	numbers.push(rollD20());
     } 
     
 }
