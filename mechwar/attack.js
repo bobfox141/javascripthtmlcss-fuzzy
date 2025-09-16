@@ -2,7 +2,7 @@
 
 // the standard attack class. This is really simple for now, but it will grow.
 // an attack is an instance in itself because it doesn't matter to the target
-// what hit it.
+// what hit it. so every half turn an attack is created and destroyed.
 
 class Attack {
   constructor(c, b, d) {
