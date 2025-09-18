@@ -1,5 +1,7 @@
 #!/
 
+import { Attack } from "./attack.js";
+
 class Mech {
   constructor(nm, hp, dam, ar, sh, pi) {
     this.name = nm;
@@ -19,6 +21,14 @@ class Mech {
     this.shutdown = false;
   }
 
+  rollD20() {
+    const randomNumber = Math.random();
+    const scaledNumber = randomNumber * 20;
+    const floorNumber = Math.floor(scaledNumber);
+    const result = floorNumber + 1;
+    return result;
+  }
+
   setdamage(d) {
     this.damage = d;
   }
@@ -29,10 +39,9 @@ class Mech {
 
   // basic to hit calculation
   attack(a) {
-    a = new Attack();
-    let roll = rollD20();
+    let roll = this.rollD20();
     // attack tree.
-    a.critical = false;
+    a.setcritical(false);
     a.badmiss = false;
     a.damage = 0;
     a.damagebonus = 2;
@@ -75,8 +84,8 @@ class Mech {
       a.critical = false;
       a.badmiss = true;
       a.damage = this.damage + (this.damage * this.pilot) / 200.0; // bad miss damage is reflected on the firing mech.
-      return false;
     }
+    return a;
   }
 
   // defend routine
@@ -129,7 +138,6 @@ class Mech {
         } else {
           console.log("Critical Defend, all damage blocked!");
           damage = 0;
-          return false;
         }
         if (this.hp < 1) {
           console.log("Defender systems shutdown, status critical, ejecting!");
@@ -151,9 +159,8 @@ class Mech {
         damage = damage * 1.5;
         this.hp -= damage;
       }
-      return true;
     }
-    return false;
+    return a;
   }
 }
 

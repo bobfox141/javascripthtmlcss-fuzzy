@@ -61,7 +61,7 @@ function loadplayermech() {
 
 function createplayermech() {
   console.log("Creating Player mech.");
-  p = new PlayerMech("Rogue", 100, 20, 20, 15, 85, 1.5, 2);
+  var p = new PlayerMech("Rogue", 100, 20, 20, 15, 85, 1.5, 2);
   return p;
 }
 
@@ -82,8 +82,8 @@ function loadcomputermech() {
 // simple create mech from scratch
 function createcomputermech() {
   console.log("Creating AI mech.");
-  p = new PlayerMech("Timberwolf", 100, 20, 20, 15, 85, 2, 1.5);
-  return p;
+  var c = new PlayerMech("Timberwolf", 100, 20, 20, 15, 85, 2, 1.5);
+  return c;
 }
 // this is binary initiative.
 function initiative() {
@@ -98,8 +98,8 @@ function playermove(pmech, cmech, a) {
   a = cmech.defend(a);
 }
 
-function computermove(pmech, cmech, a) {
-  a = cmech.attack(a);
+function computermove(cmech, pmech, a) {
+  a = cmech.attack(a); // calls the attack function of the mech, then returns the attack
   a = pmech.defend(a);
 }
 
@@ -131,25 +131,26 @@ function main() {
   );
   console.log("computers computer.yaml file, generated before battle! ");
   // test the random number gen
-  testrandom();
+  // testrandom();
   console.log();
 
   // load the data files
 
   // create the mechs and add the data
-  let playermech = createplayermech();
-  let computermech = createcomputermech();
+  var p = createplayermech();
+  var c = createcomputermech();
+  var a = new Attack();
   while (!winner) {
     console.log("Rolling for intialtive. Tie goes to the great sky wizard.");
-    var a = new Attack();
+
     if (initiative()) {
       console.log("Player has initiative and moves first.");
-      playermove(playermech, a);
-      computermove(computermech, a);
+      playermove(p, c, a);
+      computermove(c, p, a);
     } else {
       console.log("Computer has initiative and moves first.");
-      computermove();
-      playermove();
+      computermove(c, a);
+      playermove(p, a);
     }
     winner = endofturn();
   }
