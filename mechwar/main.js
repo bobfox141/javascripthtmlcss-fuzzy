@@ -94,11 +94,15 @@ function initiative() {
 }
 
 function playermove(pmech, cmech, a) {
+  process.stdout.write("function Playermove: Type of Attack Parameter: ");
+  console.log(typeof a);
   a = pmech.attack(a);
   a = cmech.defend(a);
 }
 
 function computermove(cmech, pmech, a) {
+  process.stdout.write("function ComputerMove: Type of Attack Parameter: ");
+  console.log(typeof a);
   a = cmech.attack(a); // calls the attack function of the mech, then returns the attack
   a = pmech.defend(a);
 }
@@ -139,16 +143,18 @@ function main() {
   // create the mechs and add the data
   var p = createplayermech();
   var c = createcomputermech();
-  var a = new Attack();
+
   while (!winner) {
     console.log("Rolling for intialtive. Tie goes to the great sky wizard.");
 
     if (initiative()) {
       console.log("Player has initiative and moves first.");
+      var a = new Attack();
       playermove(p, c, a);
       computermove(c, p, a);
     } else {
       console.log("Computer has initiative and moves first.");
+      var a = new Attack();
       computermove(c, a);
       playermove(p, a);
     }

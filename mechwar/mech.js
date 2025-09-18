@@ -6,7 +6,7 @@ class Mech {
   constructor(nm, hp, dam, ar, sh, pi) {
     this.name = nm;
     this.hitpoints = hp;
-    this.damage = dam; // this is damage range [1.. dam]
+    this.damage = dam; // this is the base damage range [1.. dam]
     this.armor = ar;
     this.shields = sh;
     this.eject = true;
@@ -39,9 +39,11 @@ class Mech {
 
   // basic to hit calculation
   attack(a) {
+    process.stdout.write("Type of Attack Parameter: ");
+    console.log(typeof a);
     let roll = this.rollD20();
     // attack tree.
-    a.setcritical(false);
+    a.critical = false; // this is supposed to set the critical property to
     a.badmiss = false;
     a.damage = 0;
     a.damagebonus = 2;
@@ -54,14 +56,14 @@ class Mech {
       a.critical = true;
       a.badmiss = false;
       a.hit = true;
-      a.damage = this.dam * damagebonus; // critical hit, max damage + critical bonus
+      a.damage = this.damage * a.damagebonus; // critical hit, max damage + critical bonus
     } else if (roll > 10) {
       // direct hit full damage * pilot skill
       process.stdout.write("Direct Hit! Calculating damage... ");
       a.critical = false;
       a.badmiss = false;
       a.hit = true;
-      damage = this.damage + (this.damage * this.pilot) / 100.0;
+      a.damage = this.damage + (this.damage * this.pilot) / 100.0;
     } else if (roll > 7) {
       // glancing hit affected by skill of pilot
       process.stdout.write(
@@ -73,7 +75,7 @@ class Mech {
       a.hit = true;
     } else if (roll > 2) {
       // complete miss
-      a.console.log("Miss. No damage, no energy transferred.");
+      console.log("Miss. No damage, no energy transferred.");
       a.critical = false;
       a.badmiss = false;
       a.damage = 0;
@@ -95,7 +97,7 @@ class Mech {
     let damage = a.damage;
     let damagebonus = a.damagebonus;
     let hit = a.hit;
-    let roll = rollD20();
+    let roll = this.rollD20();
     // if there is damage
     if (damage > 0) {
       console.log("Attack hits, damage applied, rolling to defend...");
