@@ -107,7 +107,10 @@ function computermove(cmech, pmech, a) {
   a = pmech.defend(a);
 }
 
-function endofturn() {
+// returns true or false based on whether there is a winner or not.
+// winning conditions a mech hp = 0 or it has no mobility.. i.e.
+// no legs
+function endofbattle(p, c) {
   return true;
 }
 
@@ -159,7 +162,7 @@ function main() {
       computermove(c, p, a);
       playermove(p, c, a);
     }
-    winner = endofturn();
+    winner = endofbattle();
   }
 }
 
