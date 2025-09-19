@@ -144,6 +144,7 @@ function main() {
   var p = createplayermech();
   var c = createcomputermech();
 
+  // so the idea is to repeat combat turns till someone wins.
   while (!winner) {
     console.log("Rolling for intialtive. Tie goes to the great sky wizard.");
 
@@ -155,8 +156,8 @@ function main() {
     } else {
       console.log("Computer has initiative and moves first.");
       var a = new Attack();
-      computermove(c, a);
-      playermove(p, a);
+      computermove(c, p, a);
+      playermove(p, c, a);
     }
     winner = endofturn();
   }
