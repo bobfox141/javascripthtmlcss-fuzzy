@@ -42,7 +42,7 @@ window.addEventListener("load", () => {
     const task = capitalise(input.value);
 
     if (!task) {
-      alert("Please add a task");
+      alert("Please add a task to the list:");
       return;
     }
 

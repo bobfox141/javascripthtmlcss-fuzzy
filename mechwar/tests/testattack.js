@@ -19,12 +19,22 @@ function testAssignAttribs() {
   p.damage = 10;
   process.stdout.write("p.badmiss == ");
   console.log(p.badmiss);
+  process.stdout.write("p.critical == ");
+  console.log(p.critical);
+}
+
+function testGetDamage() {
+  var p = new Attack();
+  p.damage = 10;
+  process.stdout.write("p.damage == ");
+  console.log(p.damage);
 }
 
 function main() {
   console.log("Running unit tests to completion.");
   testAttackcreate();
   testAssignAttribs();
+  testGetDamage();
 }
 
 main();
